@@ -1,0 +1,144 @@
+# ============================================================
+#  ChatPlugin - configuration
+#  Format des textes : MiniMessage (https://docs.advntr.dev/minimessage/)
+# ============================================================
+
+annonces:
+  actif: true
+  # Délai entre deux annonces (en secondes)
+  intervalle: 300
+  # true = ordre aléatoire, false = dans l'ordre de la liste
+  aleatoire: false
+  # Préfixe ajouté devant chaque annonce
+  prefixe: "<gold><bold>Annonce</bold> <dark_gray>» </dark_gray>"
+  # Chaque élément de la liste = une annonce
+  # Une annonce peut avoir plusieurs lignes en utilisant <newline>
+  messages:
+    - "<gray>Ouvre tes caisses avec <click:run_command:/caisse><hover:show_text:'<yellow>Clique pour ouvrir /caisse'><yellow>[/caisse]</yellow></hover></click> !"
+    - "<gray>Pense à voter pour le serveur, des récompenses t'attendent !"
+    - "<gray>Besoin d'aide ? Demande à un membre du staff."
+
+cooldown:
+  actif: true
+  # Délai minimum entre deux messages (en secondes)
+  secondes: 5
+  # <temps> = temps restant en secondes
+  message: "<red>Attends encore <temps>s avant de renvoyer un message."
+
+commandes-chat:
+  actif: true
+  # Texte tapé dans le chat qui déclenche la conversion : ./caisse -> [/caisse]
+  prefixe-saisie: "./"
+  # run_command = exécute la commande au clic | suggest_command = la met dans la barre de chat
+  action: "run_command"
+  # Affichage de la commande dans le chat (<commande> = nom de la commande)
+  format: "<yellow>[/<commande>]</yellow>"
+  # Texte affiché au survol
+  survol: "<gray>Clique pour exécuter <yellow>/<commande>"
+  # Liste des commandes autorisées (sans le /). Laisse vide [] pour tout autoriser.
+  commandes-autorisees:
+    - caisse
+    - classement
+    - niveau
+    - quete
+    - sell
+    - prix
+    - spawn
+
+# ============================================================
+#  Chat réaction
+#  Placeholders : <question> <duree> <joueur> <reponse> <temps>
+# ============================================================
+reactions:
+  actif: true
+  # Délai entre deux chat réactions (en secondes)
+  intervalle: 600
+  # Nombre minimum de joueurs connectés pour lancer une partie
+  joueurs-minimum: 1
+  prefixe: "<light_purple><bold>Réaction</bold> <dark_gray>» </dark_gray>"
+
+  # Récompenses tirées au sort pour le gagnant.
+  # chance = poids du tirage (si le total fait 100, c'est un pourcentage).
+  # nom = texte affiché dans l'annonce (MiniMessage autorisé)
+  # commandes = exécutées par la console, %joueur% = pseudo du gagnant
+  recompenses:
+    - nom: "<aqua>1 diamant</aqua>"
+      chance: 40
+      commandes:
+        - "give %joueur% diamond 1"
+    - nom: "<gold>5 pommes en or</gold>"
+      chance: 30
+      commandes:
+        - "give %joueur% golden_apple 5"
+    - nom: "<green>16 émeraudes</green>"
+      chance: 20
+      commandes:
+        - "give %joueur% emerald 16"
+    - nom: "<light_purple><bold>1 pomme enchantée</bold></light_purple>"
+      chance: 9
+      commandes:
+        - "give %joueur% enchanted_golden_apple 1"
+    - nom: "<red><bold>JACKPOT : 1 bloc de netherite</bold></red>"
+      chance: 1
+      commandes:
+        - "give %joueur% netherite_block 1"
+        - "say JACKPOT pour %joueur% !"
+
+  types:
+    craft:
+      actif: true
+      duree: 25
+      # Format : MATERIAL;texte affiché
+      items:
+        - "OAK_BOAT;un bateau en chêne"
+        - "CRAFTING_TABLE;un établi"
+        - "FURNACE;un four"
+        - "CHEST;un coffre"
+        - "BUCKET;un seau"
+        - "IRON_PICKAXE;une pioche en fer"
+        - "BOW;un arc"
+        - "TORCH;des torches"
+    mot:
+      actif: true
+      duree: 15
+      mots:
+        - "cheval"
+        - "diamant"
+        - "minerai"
+        - "forteresse"
+        - "villageois"
+        - "enchantement"
+        - "citrouille"
+        - "squelette"
+    capitale:
+      actif: true
+      duree: 15
+      # Format : Pays;Capitale (réponses alternatives séparées par /)
+      questions:
+        - "France;Paris"
+        - "Espagne;Madrid"
+        - "Italie;Rome"
+        - "Allemagne;Berlin"
+        - "Japon;Tokyo"
+        - "Canada;Ottawa"
+        - "Portugal;Lisbonne"
+        - "Égypte;Le Caire"
+        - "Brésil;Brasilia"
+        - "Royaume-Uni;Londres"
+
+  messages:
+    debut-craft: "<yellow>Le premier à crafter <white><question></white> gagne ! <gray>(<duree>s)"
+    debut-mot: "<yellow>Complétez le mot : <white><bold><question></bold> <gray>(<duree>s)"
+    debut-capitale: "<yellow>Quelle est la capitale de <white><bold><question></bold><yellow> ? <gray>(<duree>s)"
+    gagne: "<green><joueur></green> <gray>a trouvé <white><reponse></white> en <temps>s et gagne <recompense><gray> !"
+    perdu: "<red>Personne n'a trouvé ! <gray>La réponse était : <white><reponse>"
+
+messages:
+  reaction-lancee: "<green>Chat réaction lancé."
+  reaction-impossible: "<red>Impossible de lancer : une partie est déjà en cours ou la config est invalide."
+  reaction-stop: "<green>Chat réaction arrêté."
+  reaction-aucune: "<red>Aucun chat réaction en cours."
+  reload: "<green>Configuration rechargée."
+  pas-permission: "<red>Tu n'as pas la permission."
+  usage: "<red>Usage : /chatplugin [reload|annonce|reaction [craft|mot|capitale|stop]]"
+  annonce-envoyee: "<green>Annonce envoyée."

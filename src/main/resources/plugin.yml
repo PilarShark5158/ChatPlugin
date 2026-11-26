@@ -1,0 +1,20 @@
+name: ChatPlugin
+version: '${project.version}'
+main: fr.chatplugin.ChatPlugin
+api-version: '26.2'
+description: Annonces automatiques et commandes cliquables dans le chat
+commands:
+  chatplugin:
+    description: Gestion du plugin de chat
+    usage: /chatplugin <reload|annonce|reaction>
+    aliases: [cp]
+permissions:
+  chatplugin.admin:
+    description: Permet d'utiliser /chatplugin
+    default: op
+  chatplugin.bypass:
+    description: Ignore le cooldown du chat
+    default: op
+  chatplugin.commande:
+    description: Permet d'écrire ./commande cliquable dans le chat
+    default: true
